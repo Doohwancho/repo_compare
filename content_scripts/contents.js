@@ -5,29 +5,31 @@ const currentYear = new Date().getFullYear();
 
 // Inject comparison UI into GitHub page
 function injectComparisonUI() {
-    const targetElement = document.querySelector('.mt-4');
-    if (!targetElement) return;
+  const targetElement = document.querySelector('.mt-4');
+  if (!targetElement) return;
 
-    const currentUsername = window.location.pathname.split('/')[1];
-    if (!FIXED_USERS.includes(currentUsername)) return;
+  const currentUsername = window.location.pathname.split('/')[1];
+  if (!FIXED_USERS.includes(currentUsername)) return;
 
-    const comparisonHTML = `
-        <div class="gh-comparison-wrapper">
-            <div class="gh-comparison-header">
-                <h2 class="h4">Repository Comparison with ${currentUsername === FIXED_USERS[0] ? FIXED_USERS[1] : FIXED_USERS[0]}</h2>
-            </div>
-            <div class="gh-comparison-content">
-                <div class="gh-user-column" id="user1-repos"></div>
-                <div class="gh-user-column" id="user2-repos"></div>
-            </div>
-        </div>
-    `;
+  const comparisonHTML = `
+      <div class="gh-comparison-wrapper">
+          <div class="gh-comparison-content">
+              <div class="gh-user-column" id="user1-repos">
+                  <div class="gh-user-header" id="user1-header"></div>
+              </div>
+              <div class="gh-user-column" id="user2-repos">
+                  <div class="gh-user-header" id="user2-header"></div>
+              </div>
+          </div>
+      </div>
+  `;
 
-    // Insert before the target element
-    targetElement.insertAdjacentHTML('beforebegin', comparisonHTML);
+  // Insert before the target element
+  targetElement.insertAdjacentHTML('beforebegin', comparisonHTML);
 
-    initComparison();
+  initComparison();
 }
+
 
 // Cache management functions
 async function getCachedData(key) {
@@ -184,21 +186,30 @@ function groupReposByYear(repos) {
 
 
 async function createUserColumn(userData, repos, columnId) {
-    const column = document.getElementById(columnId);
-    column.innerHTML = `<h3 class="h5 mb-3">${userData.login}'s repositories</h3>`;
+  const column = document.getElementById(columnId);
+  const headerElement = column.querySelector('.gh-user-header');
+  
+  // Set up user header
+  headerElement.innerHTML = `
+      <img src="${userData.avatar_url}" alt="${userData.login}" class="gh-user-avatar">
+      <div class="gh-user-info">
+          <h2>${userData.login}</h2>
+          <div>Public repos: ${userData.public_repos}</div>
+      </div>
+  `;
 
-    const reposByYear = groupReposByYear(repos);
-    
-    Object.entries(reposByYear)
-        .sort(([a], [b]) => b - a)
-        .forEach(([year, yearRepos]) => {
-            const yearSection = createYearSection(
-                parseInt(year),
-                yearRepos,
-                parseInt(year) === currentYear
-            );
-            column.appendChild(yearSection);
-        });
+  const reposByYear = groupReposByYear(repos);
+  
+  Object.entries(reposByYear)
+      .sort(([a], [b]) => b - a)
+      .forEach(([year, yearRepos]) => {
+          const yearSection = createYearSection(
+              parseInt(year),
+              yearRepos,
+              parseInt(year) === currentYear
+          );
+          column.appendChild(yearSection);
+      });
 }
 
 async function initComparison() {
