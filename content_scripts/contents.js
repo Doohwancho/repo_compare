@@ -5,11 +5,24 @@ const currentYear = new Date().getFullYear();
 
 // Inject comparison UI into GitHub page
 function injectComparisonUI() {
-  const targetElement = document.querySelector('.mt-4');
-  if (!targetElement) return;
+  // Look for mt-4 class div specifically inside user-profile-frame (그래야 로그아웃 페이지에서도 올바른 위치에 insert된다.)
+  const userProfileFrame = document.getElementById('user-profile-frame');
+  if (!userProfileFrame) {
+      console.log('User profile frame not found');
+      return;
+  }
+
+  const targetElement = userProfileFrame.querySelector('.mt-4');
+  if (!targetElement) {
+      console.log('Target element not found inside user profile frame');
+      return;
+  }
 
   const currentUsername = window.location.pathname.split('/')[1];
-  if (!FIXED_USERS.includes(currentUsername)) return;
+  if (!FIXED_USERS.includes(currentUsername)) {
+      console.log('Not a target user page');
+      return;
+  }
 
   const comparisonHTML = `
       <div class="gh-comparison-wrapper">
