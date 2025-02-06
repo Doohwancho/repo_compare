@@ -72,14 +72,36 @@
 
 .gh-year-content {
     transition: max-height 0.3s ease-out;
-    overflow: hidden;
-    max-height: 1000px;
+    max-height: 700px;
+    overflow: auto; /* Allow vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #d0d7de #f6f8fa; /* For Firefox */
+}
+
+/* Webkit scrollbar styling (Chrome, Safari, Edge) */
+.gh-year-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.gh-year-content::-webkit-scrollbar-track {
+    background: #f6f8fa;
+    border-radius: 4px;
+}
+
+.gh-year-content::-webkit-scrollbar-thumb {
+    background: #d0d7de;
+    border-radius: 4px;
+}
+
+.gh-year-content::-webkit-scrollbar-thumb:hover {
+    background: #afb8c1;
 }
 
 .gh-year-content.collapsed {
     max-height: 0;
     margin-bottom: 0;
     padding: 0;
+    overflow: hidden; /* Override overflow-y when collapsed */
 }
 
 .collapse-icon {
