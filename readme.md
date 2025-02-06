@@ -10,4 +10,4 @@ compare your repos with a skilled developer.
 
 > A. because you toyed around with js stuff while he's built engine from scratch with cpp
 
-> A. and yes, I'm talking to myself.
+> A. and yes, I'm talking about myself.
