@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Repo Commparer",
+    "version": "1.0",
+    "description": "Compare Github repositories",
+    "permissions": ["activeTab", "storage"],
+    "host_permissions": [
+      "https://api.github.com/*",
+      "https://github.com/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://github.com/Doohwancho/*"],
+        "css": ["content_scripts/contents.css"],
+        "js": ["content_scripts/contents.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup/popup.html"
+    }
+  }

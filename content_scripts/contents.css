@@ -1,0 +1,98 @@
+.gh-comparison-wrapper {
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--color-canvas-default);
+}
+
+.gh-comparison-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gh-comparison-content {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+}
+
+.gh-user-column {
+    flex: 1;
+    min-width: 0;
+}
+
+.gh-year-section {
+    margin-bottom: 16px;
+}
+
+.gh-year-header {
+    padding: 8px;
+    background-color: var(--color-canvas-subtle);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gh-year-content {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    max-height: 1000px;
+}
+
+.gh-year-content.collapsed {
+    max-height: 0;
+    margin: 0;
+}
+
+.gh-repo-card {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.gh-repo-name {
+    color: var(--color-accent-fg);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.gh-repo-description {
+    color: var(--color-fg-muted);
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.gh-repo-meta {
+    font-size: 12px;
+    color: var(--color-fg-muted);
+}
+
+.gh-compare-input {
+    padding: 5px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 200px;
+    margin-right: 8px;
+}
+
+.gh-compare-button {
+    padding: 5px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: var(--color-btn-primary-bg);
+    border: 1px solid var(--color-btn-primary-border);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.gh-compare-button:hover {
+    background-color: var(--color-btn-primary-hover-bg);
+}
